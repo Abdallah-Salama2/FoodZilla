@@ -1,0 +1,92 @@
+@startuml
+set namespaceSeparator ::
+
+class "foodzilla::database::database.dart::SqlDb" {
+  {static} -Database? _db
+  +dynamic db
+  +dynamic initializeDb()
+  -dynamic _onUpgrade()
+  -dynamic _onCreate()
+  +dynamic readData()
+  +dynamic insertData()
+  +dynamic updateData()
+  +dynamic deleteData()
+  +dynamic dropTable()
+  +dynamic isEmailAlreadyExists()
+  +dynamic isUsernameExists()
+  +dynamic showDatabaseTables()
+  +dynamic checkPassword()
+  +dynamic getDatabasePath()
+  +dynamic getTableIds()
+  +dynamic getRecommendedMeal()
+  +dynamic getAllMeals()
+  +dynamic getFoodDetailsList()
+  +dynamic getRestaurantDetailsList()
+  +dynamic getAddressByUsername()
+  +dynamic getMobileByUsername()
+  +dynamic getFoodDetailsListByRestaurantId()
+  +dynamic searchMealsByName()
+  +dynamic searchRestaurantsByName()
+}
+
+"foodzilla::database::database.dart::SqlDb" o-- "sqflite_common::sqlite_api.dart::Database"
+
+class "foodzilla::main.dart::FoodZilla" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "foodzilla::main.dart::FoodZilla"
+
+"foodzilla::pages::restaurantsPage::restaurentPage.dart::RestaurantsPage" o-- "foodzilla::database::database.dart::SqlDb"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "foodzilla::pages::restaurantsPage::restaurentPage.dart::RestaurantsPage"
+
+class "foodzilla::pages::restaurantsPage::widgets::restaurant_item.dart::RestaurantITem" {
+  +SqlDb db
+  +Restaurant restItem
+  {static} +List<Food> checkoutList
+  +Widget build()
+}
+
+"foodzilla::pages::restaurantsPage::widgets::restaurant_item.dart::RestaurantITem" o-- "foodzilla::database::database.dart::SqlDb"
+"foodzilla::pages::restaurantsPage::widgets::restaurant_item.dart::RestaurantITem" o-- "foodzilla::pages::mainmenu::models::restaurant.dart::Restaurant"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "foodzilla::pages::restaurantsPage::widgets::restaurant_item.dart::RestaurantITem"
+
+class "foodzilla::pages::restaurantsPage::widgets::restaurant_list.dart::RestaurantList" {
+  +int totalPrice
+  +dynamic restListFuture
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "foodzilla::pages::restaurantsPage::widgets::restaurant_list.dart::RestaurantList"
+
+class "foodzilla::pages::searchResultsPage::searchResultsPage.dart::SearchResultsPage" {
+  +String searchQuery
+  +SqlDb db
+  +Widget build()
+}
+
+"foodzilla::pages::searchResultsPage::searchResultsPage.dart::SearchResultsPage" o-- "foodzilla::database::database.dart::SqlDb"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "foodzilla::pages::searchResultsPage::searchResultsPage.dart::SearchResultsPage"
+
+class "foodzilla::pages::splash::splashPage.dart::SplashBody" {
+  +State<SplashBody> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "foodzilla::pages::splash::splashPage.dart::SplashBody"
+
+class "foodzilla::pages::splash::splashPage.dart::_SplashBodyState" {
+  +AnimationController? animationController
+  +Animation<double>? fadingAnimation
+  +void initState()
+  +void dispose()
+  +Widget build()
+  +void goToNextView()
+}
+
+"foodzilla::pages::splash::splashPage.dart::_SplashBodyState" o-- "flutter::src::animation::animation_controller.dart::AnimationController"
+"foodzilla::pages::splash::splashPage.dart::_SplashBodyState" o-- "flutter::src::animation::animation.dart::Animation<double>"
+"flutter::src::widgets::framework.dart::State" <|-- "foodzilla::pages::splash::splashPage.dart::_SplashBodyState"
+"flutter::src::widgets::ticker_provider.dart::SingleTickerProviderStateMixin" <|-- "foodzilla::pages::splash::splashPage.dart::_SplashBodyState"
+
+
+@enduml

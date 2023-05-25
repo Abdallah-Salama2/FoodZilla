@@ -1,0 +1,98 @@
+@startuml
+set namespaceSeparator ::
+
+
+class "foodzilla::pages::mainmenu::Landing.dart::LandingPage" {
+  +String userName
+  +State<LandingPage> createState()
+}
+
+"flutter::src::widgets::framework.dart::StatefulWidget" <|-- "foodzilla::pages::mainmenu::Landing.dart::LandingPage"
+
+class "foodzilla::pages::mainmenu::Landing.dart::_LandingPageState" {
+  -TextEditingController _searchController
+  +SqlDb db
+  +dynamic getid()
+  +Widget build()
+}
+
+"foodzilla::pages::mainmenu::Landing.dart::_LandingPageState" o-- "flutter::src::widgets::editable_text.dart::TextEditingController"
+"foodzilla::pages::mainmenu::Landing.dart::_LandingPageState" o-- "foodzilla::database::database.dart::SqlDb"
+"flutter::src::widgets::framework.dart::State" <|-- "foodzilla::pages::mainmenu::Landing.dart::_LandingPageState"
+
+class "foodzilla::pages::mainmenu::models::food.dart::Food" {
+  +Uint8List? imageBytes
+  +String desc
+  +String name
+  +String restName
+  +num score
+  +num price
+  +num quantity
+  +bool highlight
+}
+
+"foodzilla::pages::mainmenu::models::food.dart::Food" o-- "dart::typed_data::Uint8List"
+
+class "foodzilla::pages::mainmenu::models::restaurant.dart::Restaurant" {
+  +int restId
+  +Uint8List? imageBytes
+  +String restName
+}
+
+"foodzilla::pages::mainmenu::models::restaurant.dart::Restaurant" o-- "dart::typed_data::Uint8List"
+
+class "foodzilla::pages::mainmenu::widgets::checkout_item.dart::CheckoutItem" {
+  +Food checkoutItem
+  +Widget build()
+}
+
+"foodzilla::pages::mainmenu::widgets::checkout_item.dart::CheckoutItem" o-- "foodzilla::pages::mainmenu::models::food.dart::Food"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "foodzilla::pages::mainmenu::widgets::checkout_item.dart::CheckoutItem"
+
+class "foodzilla::pages::mainmenu::widgets::checkout_list.dart::CheckoutList" {
+  +int totalPrice
+  +List<Food> checkoutList
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "foodzilla::pages::mainmenu::widgets::checkout_list.dart::CheckoutList"
+
+class "foodzilla::pages::mainmenu::widgets::food_item.dart::FoodItem" {
+  +Food foodItem
+  {static} +num totalPrice
+  {static} +List<Food> checkoutList
+  +SnackBar snackBar
+  +Widget build()
+}
+
+"foodzilla::pages::mainmenu::widgets::food_item.dart::FoodItem" o-- "foodzilla::pages::mainmenu::models::food.dart::Food"
+"foodzilla::pages::mainmenu::widgets::food_item.dart::FoodItem" o-- "flutter::src::material::snack_bar.dart::SnackBar"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "foodzilla::pages::mainmenu::widgets::food_item.dart::FoodItem"
+
+class "foodzilla::pages::mainmenu::widgets::food_list.dart::FoodList" {
+  +int totalPrice
+  +dynamic foodListFuture
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "foodzilla::pages::mainmenu::widgets::food_list.dart::FoodList"
+
+class "foodzilla::pages::mainmenu::widgets::home_page_title.dart::HomePageTitle" {
+  +Widget build()
+}
+
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "foodzilla::pages::mainmenu::widgets::home_page_title.dart::HomePageTitle"
+
+class "foodzilla::pages::mealsPage::mealsPage.dart::MealsPage" {
+  +String id
+  +SqlDb db
+  +dynamic getRecommid()
+  +dynamic getAllid()
+  +Widget build()
+}
+
+"foodzilla::pages::mealsPage::mealsPage.dart::MealsPage" o-- "foodzilla::database::database.dart::SqlDb"
+"flutter::src::widgets::framework.dart::StatelessWidget" <|-- "foodzilla::pages::mealsPage::mealsPage.dart::MealsPage"
+
+@enduml
+
