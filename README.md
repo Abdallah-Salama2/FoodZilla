@@ -1,6 +1,6 @@
 # foodzilla
 
-A new Flutter project.
+FOR More Info & analysis check FoodzillaSRS.pdf
 
 ## Getting Started
 
