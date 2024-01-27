@@ -1,7 +1,7 @@
 # foodzilla
 
 FOR More Info & analysis check FoodzillaSRS.pdf
-- [FoodZillaSRS.PDF]([https://docs.flutter.dev/get-started/codelab](https://github.com/Abdallah-Salama2/FoodZilla/blob/main/FoodZilla%20SRS.pdf))
+- [FoodZillaSRS.PDF](https://github.com/Abdallah-Salama2/FoodZilla/blob/main/FoodZilla%20SRS.pdf)
 
 
 ## Getting Started
